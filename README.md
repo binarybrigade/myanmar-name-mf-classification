@@ -1,2 +1,1 @@
-# myanmar-name-mf-classification
-Myanmar Name Male Female Classification
+# Myanmar Name Male Female Classification
