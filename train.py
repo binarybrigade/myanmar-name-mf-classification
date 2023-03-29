@@ -342,17 +342,17 @@ def test_all_and_generate_special():
 
 def data_preprocessing():
     clean_data()
-    word_columns_by_segments()
+    #word_columns_by_segments()
     #word_columns_by_syllable_tokenization()
-    #word_columns_by_multilingual_semi_syllable_break()
+    word_columns_by_multilingual_semi_syllable_break()
     #word_columns_by_character_tokenization()
     mf_leading_exclude_list()
 
 if __name__ == "__main__":
     data_preprocessing()
-    train("By Segment","./processed_data/words_by_segments.csv","mf_logistic_regression_by_segments")
+    #train("By Segment","./processed_data/words_by_segments.csv","mf_logistic_regression_by_segments")
     #train("By Character Tokenization","./processed_data/words_by_character_tokenization.csv","mf_logistic_regression_by_character_tokenization")
     #train("By Syllable Tokenization","./processed_data/words_by_syllable_tokenization.csv","mf_logistic_regression_by_syllable_tokenization")
-    #train("By Multilingual Semi Syllable Break","./processed_data/words_by_multilingual_semi_syllable_break.csv","mf_logistic_regression_by_multilingual_semi_syllable_break")
+    train("By Multilingual Semi Syllable Break","./processed_data/words_by_multilingual_semi_syllable_break.csv","mf_logistic_regression_by_multilingual_semi_syllable_break")
     test_all_and_generate_special()
     

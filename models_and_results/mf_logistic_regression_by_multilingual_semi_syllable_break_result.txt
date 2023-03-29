@@ -1,12 +1,12 @@
 By Multilingual Semi Syllable Break
-Total is 6347. Male is 3188. Female is 3159
-Score is : 92.28346456692913
+Total is 6356. Male is 3188. Female is 3168
+Score is : 94.0251572327044
 Confusion Matrix result
 True Negative is 314
 False Positive is 16
-False Negative is 33
-True Positive is 272
-Accuracy Score 92.28346456692913%
-Precision Macro Score 92.46717899455652%
-Recall_Score 92.16592151018381%
-F_Score 92.24955848762394%
+False Negative is 22
+True Positive is 284
+Accuracy Score 94.0251572327044%
+Precision Macro Score 94.05952380952381%
+Recall_Score 93.9809863339275%
+F_Score 94.01183361579402%

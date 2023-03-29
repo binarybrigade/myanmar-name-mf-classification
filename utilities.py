@@ -100,6 +100,10 @@ def manual_test(test_word, getMethod=False):
             clf = pickle.load(f)
         
         word_columns_raw = pd.read_csv("./processed_data/word_columns_by_segments.csv")["word_columns"].tolist()
+
+        with open('./models_and_results/mf_logistic_regression_by_multilingual_semi_syllable_break_model.pkl', 'rb') as f:
+            clf = pickle.load(f)
+        word_columns_raw = pd.read_csv("./processed_data/word_columns_by_multilingual_semi_syllable_break.csv")["word_columns"].tolist()
         
         word_columns_raw = sorted(set(word_columns_raw))
         word_columns = {}
