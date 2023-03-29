@@ -5,6 +5,7 @@ import json
 import pandas as pd
 import os
 import csv
+from difflib import SequenceMatcher
 
 def clean_text(text):
     text = text.replace("\u200c","")
@@ -119,3 +120,31 @@ def manual_test(test_word, getMethod=False):
             return sex, method
         else:
             return sex
+
+def similar(a, b):
+    return SequenceMatcher(None, a, b).ratio()
+
+def convert_en_to_mm(test_word):
+    test_word = test_word.upper()
+    
+    mapping_df = pd.read_csv("./raw_data/en_to_mm.csv")
+
+    words = test_word.strip().split(" ")
+
+    results = []
+
+    for w in words:
+        max_myanmar = ""
+        find_result = mapping_df[mapping_df["english"]==w]["myanmar"].tolist()
+        if len(find_result)>0:
+            max_myanmar = find_result[0]
+        if max_myanmar == "" or max_myanmar == None:
+            max_score = 0
+            for index, row in mapping_df.iterrows():
+                score = similar(w,str(row["english"]))
+                if score > max_score:
+                    max_score = score
+                    max_myanmar = str(row["myanmar"])
+        results.append(max_myanmar)
+    results = " ".join(results).strip()
+    return results
