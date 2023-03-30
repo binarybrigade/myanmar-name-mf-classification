@@ -10,6 +10,12 @@ from difflib import SequenceMatcher
 def clean_text(text):
     text = text.replace("\u200c","")
     text = text.replace(" ","")
+    text = text.replace("ျ","ြ")
+    text = text.replace("ည်","ီ")
+    text = text.replace("ဏ်း","န်း")
+    text = text.replace("မ်း","န်း")
+    text = text.replace("ါ","ာ")
+    text = text.replace("အူး","ဦး")
     return text
 
 def multilingual_semi_syllable_break(user_input):
@@ -44,6 +50,7 @@ def list_to_csv(my_list,path):
 
 
 def rule_base_match(test_word):
+    test_word = clean_text(test_word)
     all_words = syllable_tokenization(test_word)
     two_words = "".join(all_words[0:2])
 
@@ -65,13 +72,13 @@ def rule_base_match(test_word):
     
     special_female_two_words = pd.read_csv("./processed_data/special_female_two_words.csv")["name"].tolist()
     special_female_two_words_re = "("+"|".join(special_female_two_words)+")"
-    re_result_female = re.match(special_female_two_words_re,test_word)
+    re_result_female = re.search(special_female_two_words_re,test_word)
     if re_result_female != None:
         return 1 , 1
 
     special_male_two_words = pd.read_csv("./processed_data/special_male_two_words.csv")["name"].tolist()
     special_male_two_words_re = "("+"|".join(special_male_two_words)+")"
-    re_result_male = re.match(special_male_two_words_re,test_word)
+    re_result_male = re.search(special_male_two_words_re,test_word)
 
     if re_result_male !=None:
         return 0, 2
@@ -88,6 +95,7 @@ def rule_base_match(test_word):
     
 
 def manual_test(test_word, getMethod=False , model="multi"):
+    test_word = clean_text(test_word)
     sex , method = rule_base_match(test_word)
     if sex !=None:
         if getMethod:
