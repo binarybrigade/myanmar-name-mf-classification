@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, accuracy_score, precision_score, f1_score, recall_score
 import pickle
+import argparse
 
 male_value = 0
 female_value = 1
@@ -312,15 +313,6 @@ def test_all_and_generate_special():
             wrong=wrong+1
             wrong_method_count[method]=wrong_method_count[method]+1
             special_list[row["name"]]=row["sex"]
-            
-            """
-            if method==2:
-                print(name)
-                a = segment(name[0])
-                a = ("").join(a[0:2])
-                #print(f",\"{a}\"")
-                wrong_words.append(a)
-            """
         else:
             right_method_count[method]=right_method_count[method]+1
             right=right+1
@@ -349,10 +341,31 @@ def data_preprocessing():
     mf_leading_exclude_list()
 
 if __name__ == "__main__":
-    data_preprocessing()
-    #train("By Segment","./processed_data/words_by_segments.csv","mf_logistic_regression_by_segments")
-    #train("By Character Tokenization","./processed_data/words_by_character_tokenization.csv","mf_logistic_regression_by_character_tokenization")
-    #train("By Syllable Tokenization","./processed_data/words_by_syllable_tokenization.csv","mf_logistic_regression_by_syllable_tokenization")
-    train("By Multilingual Semi Syllable Break","./processed_data/words_by_multilingual_semi_syllable_break.csv","mf_logistic_regression_by_multilingual_semi_syllable_break")
-    test_all_and_generate_special()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-t', '--train', help='Training Type all,segment,character,syllable,multi')
+    args = parser.parse_args()
+    if args.train:
+        if args.train in ["all","segment","character","syllable","multi"]:
+
+            clean_data()
+            
+            if args.train == "segment" or args.train=="all": word_columns_by_segments() 
+            if args.train == "syllable" or args.train=="all": word_columns_by_syllable_tokenization()
+            if args.train == "multi" or args.train=="all": word_columns_by_multilingual_semi_syllable_break()
+            if args.train == "character" or args.train=="all": word_columns_by_character_tokenization()
+
+            mf_leading_exclude_list()
+            
+            if args.train == "segment" or args.train=="all": train("By Segment","./processed_data/words_by_segments.csv","mf_logistic_regression_by_segments")
+            if args.train == "syllable" or args.train=="all": train("By Syllable Tokenization","./processed_data/words_by_syllable_tokenization.csv","mf_logistic_regression_by_syllable_tokenization")
+            if args.train == "multi" or args.train=="all": train("By Multilingual Semi Syllable Break","./processed_data/words_by_multilingual_semi_syllable_break.csv","mf_logistic_regression_by_multilingual_semi_syllable_break")
+            if args.train == "character" or args.train=="all": train("By Character Tokenization","./processed_data/words_by_character_tokenization.csv","mf_logistic_regression_by_character_tokenization")
+            
+            test_all_and_generate_special()
+        else:
+            print("NO valid training type")
+    else:
+        print("No Training Type is provided. Default will be used.")    
+
+
     
