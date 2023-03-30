@@ -1,6 +1,7 @@
 # **Myanmar Male Female Classification**
 
-Demo Link : https://myanmar-names-male-female.streamlit.app
+**Demo Link**  
+[https://myanmar-names-male-female.streamlit.app](https://myanmar-names-male-female.streamlit.app){:target="_blank"}
 
 
 
