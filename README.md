@@ -2,11 +2,16 @@
 
 Demo Link : https://myanmar-names-male-female.streamlit.app
 
-This is the school project of Team Binary Brigade from Simbolo - AI Batch 9
 
-**Purpose**&nbsp;&emsp;&emsp;&emsp;: To classify Myanmar Names by sex (male or female or both).  
-**Use Cases**&nbsp;&emsp;&emsp;: It may be able to use to classify Myanmar Names. It may able to use Myanmar NER projects  
-**Limitation**&nbsp;&emsp;&emsp;: Till to this documentaiton time, there are total 6357 names in dataset. It was good to use for testing purposes. But for production use we may need to put more name to cover more names.  
+
+**Purpose**  
+To classify Myanmar Names by sex (male or female or both).  
+**Description**  
+This is the school project of Team Binary Brigade from Simbolo - AI Batch 9. We try various method including scikit-learn logistic regression and tensorflow. After many task, we use rule base plus logistic regression. All various train type include at following train options are all based on logistic regression.  
+**Use Cases**  
+It may be able to use to classify Myanmar Names. It may able to use Myanmar NER projects  
+**Limitation**  
+Till to this documentaiton time, there are total 6357 names in dataset. It was good to use for testing purposes. But for production use we may need to put more name to cover more names.  
 
 ## **Folder Structure**
 
