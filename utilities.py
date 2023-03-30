@@ -12,8 +12,8 @@ def clean_text(text):
     text = text.replace(" ","")
     text = text.replace("ျ","ြ")
     text = text.replace("ည်","ီ")
-    text = text.replace("ဏ်း","န်း")
-    text = text.replace("မ်း","န်း")
+    text = text.replace("ဏ်","န်")
+    text = text.replace("မ်","န်")
     text = text.replace("ါ","ာ")
     text = text.replace("အူး","ဦး")
     return text
