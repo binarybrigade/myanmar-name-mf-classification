@@ -1,17 +1,18 @@
 # Myanmar Male Female Classification
 
+Demo Link : https://myanmar-names-male-female.streamlit.app
+
 This is the school project of Team Binary Brigade from Simbolo - AI Batch 9
 
-Purpose    : To classify Myanmar Names by sex (male or female or both).  
-Use Cases  : It may be able to use to classify Myanmar Names. It may able to use Myanmar NER projects  
-Limitation : Till to this documentaiton time, there are total 6357 names in dataset. It was good to use for testing purposes. But for production use we may need to put more name to cover more names.  
-
+**Purpose**&nbsp;&emsp;&emsp;: To classify Myanmar Names by sex (male or female or both).  
+**Use Cases**&nbsp;&emsp;&emsp;: It may be able to use to classify Myanmar Names. It may able to use Myanmar NER projects  
+**Limitation**&nbsp;&emsp;&emsp;: Till to this documentaiton time, there are total 6357 names in dataset. It was good to use for testing purposes. But for production use we may need to put more name to cover more names.  
 
 ## How to retrain the model
 
 There are total four ways to train the model
 
-To train all, just type as follow:
+#### To train all
 
 > python ./train.py -t all
 
@@ -30,6 +31,19 @@ To train all, just type as follow:
 #### By Multilingual Semi Syllable Break ['ခို', 'င်', 'သ', 'န္', 'တာ', 'ထွ', 'န်း']
 
 > python ./train.py -t multi
+
+## How to use by import
+
+```python
+
+from utilities import manual_test
+
+#This is default test, you will only got male value as 0, female value as 1, both is 0.5
+manual_test("ခိုင်သန္တာထွန်း")
+
+
+
+```
 
 ## Sources
 
