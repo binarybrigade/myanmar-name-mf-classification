@@ -4,7 +4,7 @@ Demo Link : https://myanmar-names-male-female.streamlit.app
 
 This is the school project of Team Binary Brigade from Simbolo - AI Batch 9
 
-**Purpose**&nbsp;&emsp;&emsp;: To classify Myanmar Names by sex (male or female or both).  
+**Purpose**&nbsp;&emsp;&emsp;&emsp;&emsp;: To classify Myanmar Names by sex (male or female or both).  
 **Use Cases**&nbsp;&emsp;&emsp;: It may be able to use to classify Myanmar Names. It may able to use Myanmar NER projects  
 **Limitation**&nbsp;&emsp;&emsp;: Till to this documentaiton time, there are total 6357 names in dataset. It was good to use for testing purposes. But for production use we may need to put more name to cover more names.  
 
