@@ -87,7 +87,7 @@ def rule_base_match(test_word):
     return None , None
     
 
-def manual_test(test_word, getMethod=False):
+def manual_test(test_word, getMethod=False , model="multi"):
     sex , method = rule_base_match(test_word)
     if sex !=None:
         if getMethod:
@@ -95,15 +95,25 @@ def manual_test(test_word, getMethod=False):
         else:
             return sex
     else:
-        
-        with open('./models_and_results/mf_logistic_regression_by_segments_model.pkl', 'rb') as f:
-            clf = pickle.load(f)
-        
-        word_columns_raw = pd.read_csv("./processed_data/word_columns_by_segments.csv")["word_columns"].tolist()
+        if model == "multi":
+            source_model="./models_and_results/mf_logistic_regression_by_multilingual_semi_syllable_break_model.pkl"
+            source_word_columns="./processed_data/word_columns_by_multilingual_semi_syllable_break.csv"
+        elif model == "character":
+            source_model="./models_and_results/mf_logistic_regression_by_character_tokenization_model.pkl"
+            source_word_columns="./processed_data/word_columns_by_character_tokenization.csv"
+        elif model == "syllable":
+            source_model="./models_and_results/mf_logistic_regression_by_syllable_tokenization_model.pkl"
+            source_word_columns="./processed_data/word_columns_by_syllable_tokenization.csv"
+        elif model == "segment":
+            source_model="./models_and_results/mf_logistic_regression_by_segments_model.pkl"
+            source_word_columns="./processed_data/word_columns_by_segments.csv"
+        else:
+            source_model="./models_and_results/mf_logistic_regression_by_multilingual_semi_syllable_break_model.pkl"
+            source_word_columns="./processed_data/word_columns_by_multilingual_semi_syllable_break.csv"
 
-        with open('./models_and_results/mf_logistic_regression_by_multilingual_semi_syllable_break_model.pkl', 'rb') as f:
+        with open(source_model, 'rb') as f:
             clf = pickle.load(f)
-        word_columns_raw = pd.read_csv("./processed_data/word_columns_by_multilingual_semi_syllable_break.csv")["word_columns"].tolist()
+        word_columns_raw = pd.read_csv(source_word_columns)["word_columns"].tolist()
         
         word_columns_raw = sorted(set(word_columns_raw))
         word_columns = {}

@@ -1,12 +1,12 @@
 By Character Tokenization
-Total is 6356. Male is 3188. Female is 3168
-Score is : 87.89308176100629
+Total is 6357. Male is 3189. Female is 3168
+Score is : 88.0503144654088
 Confusion Matrix result
-True Negative is 274
-False Positive is 29
+True Negative is 275
+False Positive is 28
 False Negative is 48
 True Positive is 285
-Accuracy Score 87.89308176100629%
-Precision Macro Score 87.92874945602722%
-Recall_Score 88.007314244938%
-F_Score 87.88945904173107%
+Accuracy Score 88.0503144654088%
+Precision Macro Score 88.09681599224521%
+Recall_Score 88.17233074658817%
+F_Score 88.04735951888743%
