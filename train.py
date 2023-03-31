@@ -51,26 +51,52 @@ def clean_data():
     both_words .to_csv('./processed_data/both_words.csv', index=False)
     print("Clean Data is finished.")
 
-def word_columns_by_segments():
+def prepare_word_columns(model="multi"):
+    if model=="segment":
+        word_columns_export_path = "./processed_data/word_columns_by_segments.csv"
+        words_export_path="./processed_data/words_by_segments.csv"
+        tokenization = segment
+        finish_message = "Word Columns by Segments is finish"
+    elif model=="syllable":
+        word_columns_export_path = "./processed_data/word_columns_by_syllable_tokenization.csv"
+        words_export_path="./processed_data/words_by_syllable_tokenization.csv"
+        tokenization = syllable_tokenization
+        finish_message = "Word Columns by Syllable Tokenization is finished."
+    elif model=="multi":
+        word_columns_export_path = "./processed_data/word_columns_by_multilingual_semi_syllable_break.csv"
+        words_export_path="./processed_data/words_by_multilingual_semi_syllable_break.csv"
+        tokenization = multilingual_semi_syllable_break
+        finish_message = "Word Columns by Multilingual Semi Syllable Break is finished."
+    elif model=="character":
+        word_columns_export_path = "./processed_data/word_columns_by_character_tokenization.csv"
+        words_export_path="./processed_data/words_by_character_tokenization.csv"
+        tokenization = character_tokenization
+        finish_message = "Word Columns by Character Tokenization is finished."
+    else:
+        word_columns_export_path = "./processed_data/word_columns_by_multilingual_semi_syllable_break.csv"
+        words_export_path="./processed_data/words_by_multilingual_semi_syllable_break.csv"
+        tokenization = multilingual_semi_syllable_break
+        finish_message = "Word Columns by Multilingual Semi Syllable Break is finished."
+    
     word_columns = ['OOV']
     all_names = retrieve_data()
     for index,value in all_names.iterrows():
-        words = segment(value["name"])
+        words = tokenization(value["name"])
         for w in words:
             if w not in word_columns:
                 word_columns.append(w)
-
+    
     word_columns = sorted(set(word_columns))
     words_template = {}
     for wc in word_columns:
         words_template[wc]=0
-    
-    pd.DataFrame(word_columns,columns=["word_columns"]).to_csv("./processed_data/word_columns_by_segments.csv",index=False)
+
+    pd.DataFrame(word_columns,columns=["word_columns"]).to_csv(word_columns_export_path,index=False)
 
     names_data=[] #This is for data
     names_sex=[] # This is for male/female 1 is female. 0 is male
     for index,row in all_names.iterrows():
-        name_segments = segment(row["name"])
+        name_segments = tokenization(row["name"])
         words = words_template.copy()
         for seg in name_segments:
             if seg in words:
@@ -83,117 +109,9 @@ def word_columns_by_segments():
     names_pd.fillna(0, inplace=True) #fill nan value into 0
     names_pd["sex"] = names_sex
 
-    names_pd.to_csv("./processed_data/words_by_segments.csv",index=False)
+    names_pd.to_csv(words_export_path,index=False)
 
-    print("Word Columns by Segments is finish")
-
-def word_columns_by_syllable_tokenization():
-    word_columns = ['OOV']
-    all_names = retrieve_data()
-    for index,value in all_names.iterrows():
-        words = syllable_tokenization(value["name"])
-        for w in words:
-            if w not in word_columns:
-                word_columns.append(w)
-    
-    word_columns = sorted(set(word_columns))
-    words_template = {}
-    for wc in word_columns:
-        words_template[wc]=0
-
-    pd.DataFrame(word_columns,columns=["word_columns"]).to_csv("./processed_data/word_columns_by_syllable_tokenization.csv",index=False)
-
-    names_data=[] #This is for data
-    names_sex=[] # This is for male/female 1 is female. 0 is male
-    for index,row in all_names.iterrows():
-        name_segments = syllable_tokenization(row["name"])
-        words = words_template.copy()
-        for seg in name_segments:
-            if seg in words:
-                words[seg] = words[seg]+1
-            else:
-                words[seg]=1
-        names_data.append(words)
-        names_sex.append(row["sex"])
-    names_pd = pd.DataFrame(names_data)
-    names_pd.fillna(0, inplace=True) #fill nan value into 0
-    names_pd["sex"] = names_sex
-
-    names_pd.to_csv("./processed_data/words_by_syllable_tokenization.csv",index=False)
-
-    print("Word Columns by Syllabla Tokenization is finished.")
-
-def word_columns_by_multilingual_semi_syllable_break():
-    word_columns = ['OOV']
-    all_names = retrieve_data()
-    for index,value in all_names.iterrows():
-        words = multilingual_semi_syllable_break(value["name"])
-        for w in words:
-            if w not in word_columns:
-                word_columns.append(w)
-    
-    word_columns = sorted(set(word_columns))
-    words_template = {}
-    for wc in word_columns:
-        words_template[wc]=0
-
-    pd.DataFrame(word_columns,columns=["word_columns"]).to_csv("./processed_data/word_columns_by_multilingual_semi_syllable_break.csv",index=False)
-
-    names_data=[] #This is for data
-    names_sex=[] # This is for male/female 1 is female. 0 is male
-    for index,row in all_names.iterrows():
-        name_segments = multilingual_semi_syllable_break(row["name"])
-        words = words_template.copy()
-        for seg in name_segments:
-            if seg in words:
-                words[seg] = words[seg]+1
-            else:
-                words[seg]=1
-        names_data.append(words)
-        names_sex.append(row["sex"])
-    names_pd = pd.DataFrame(names_data)
-    names_pd.fillna(0, inplace=True) #fill nan value into 0
-    names_pd["sex"] = names_sex
-
-    names_pd.to_csv("./processed_data/words_by_multilingual_semi_syllable_break.csv",index=False)
-
-    print("Word Columns by Multilingual Semi Syllable Break is finished.")
-
-def word_columns_by_character_tokenization():
-    word_columns = ['OOV']
-    all_names = retrieve_data()
-    for index,value in all_names.iterrows():
-        words = character_tokenization(value["name"])
-        for w in words:
-            if w not in word_columns:
-                word_columns.append(w)
-    
-    word_columns = sorted(set(word_columns))
-    words_template = {}
-    for wc in word_columns:
-        words_template[wc]=0
-
-    pd.DataFrame(word_columns,columns=["word_columns"]).to_csv("./processed_data/word_columns_by_character_tokenization.csv",index=False)
-
-    names_data=[] #This is for data
-    names_sex=[] # This is for male/female 1 is female. 0 is male
-    for index,row in all_names.iterrows():
-        name_segments = character_tokenization(row["name"])
-        words = words_template.copy()
-        for seg in name_segments:
-            if seg in words:
-                words[seg] = words[seg]+1
-            else:
-                words[seg]=1
-        names_data.append(words)
-        names_sex.append(row["sex"])
-    names_pd = pd.DataFrame(names_data)
-    names_pd.fillna(0, inplace=True) #fill nan value into 0
-    names_pd["sex"] = names_sex
-
-    names_pd.to_csv("./processed_data/words_by_character_tokenization.csv",index=False)
-
-    print("Word Columns by Character Tokenization is finished.")
+    print(finish_message)
 
 def retrieve_data():
     return pd.read_csv("./processed_data/all_names.csv")
@@ -233,8 +151,6 @@ def mf_leading_exclude_list():
     df = pd.DataFrame(exclude_list,columns=["name"])
     df.to_csv('./processed_data/leading_both_2word_exclude.csv', index=False)
     print("MF leading exclusion list is finished.")
-
-
 
 def train(title,words,model):
     print("=================================================")
@@ -291,9 +207,10 @@ def train(title,words,model):
         f.write('Recall_Score '+str(recall_score(max_y_test, max_y_pred, average = 'macro')*100)+'%\n')
         f.write('F_Score '+str(f1_score(max_y_test, max_y_pred, average = 'macro')*100)+'%\n')
 
-def test_all_and_generate_special():
-    if os.path.exists('./processed_data/special_list.csv'):
-        os.remove('./processed_data/special_list.csv')
+def test_all_and_generate_special(model="multi"):
+    print(f"=====test and generate for model {model}=====")
+    if os.path.exists(f'./processed_data/special_list_{model}.csv'):
+        os.remove(f'./processed_data/special_list_{model}.csv')
 
     #Testing Against all datasets
     all_names = retrieve_data()
@@ -306,7 +223,7 @@ def test_all_and_generate_special():
     wrong_words=[]
     special_list={}
     for index,row in all_names.iterrows():
-        result = manual_test(row["name"],True)
+        result = manual_test(row["name"],True,model)
         sex = result[0]
         method = result[1]
         if sex!=row["sex"] and sex != 0.5:
@@ -321,7 +238,7 @@ def test_all_and_generate_special():
     wrong_words = sorted(wrong_words)
 
     df = pd.DataFrame(list(special_list.items()), columns=["name", "sex"])
-    df.to_csv('./processed_data/special_list.csv',index=False)
+    df.to_csv(f'./processed_data/special_list_{model}.csv',index=False)
 
     print(f"Right is {right}")
     print(f"Wrong is {wrong}")
@@ -331,6 +248,7 @@ def test_all_and_generate_special():
     print(wrong_method_count)
     print("Right Method Count")
     print(right_method_count)
+    print("=============================================")
 
 def data_preprocessing():
     clean_data()
@@ -349,10 +267,10 @@ if __name__ == "__main__":
 
             clean_data()
             
-            if args.train == "segment" or args.train=="all": word_columns_by_segments() 
-            if args.train == "syllable" or args.train=="all": word_columns_by_syllable_tokenization()
-            if args.train == "multi" or args.train=="all": word_columns_by_multilingual_semi_syllable_break()
-            if args.train == "character" or args.train=="all": word_columns_by_character_tokenization()
+            if args.train == "segment" or args.train=="all": prepare_word_columns("segment") 
+            if args.train == "syllable" or args.train=="all": prepare_word_columns("syllable")
+            if args.train == "multi" or args.train=="all": prepare_word_columns("multi")
+            if args.train == "character" or args.train=="all": prepare_word_columns("character")
 
             mf_leading_exclude_list()
             
@@ -361,7 +279,11 @@ if __name__ == "__main__":
             if args.train == "multi" or args.train=="all": train("By Multilingual Semi Syllable Break","./processed_data/words_by_multilingual_semi_syllable_break.csv","mf_logistic_regression_by_multilingual_semi_syllable_break")
             if args.train == "character" or args.train=="all": train("By Character Tokenization","./processed_data/words_by_character_tokenization.csv","mf_logistic_regression_by_character_tokenization")
             
-            test_all_and_generate_special()
+            if args.train == "segment" or args.train=="all": test_all_and_generate_special("segment") 
+            if args.train == "syllable" or args.train=="all": test_all_and_generate_special("syllable")
+            if args.train == "multi" or args.train=="all": test_all_and_generate_special("multi")
+            if args.train == "character" or args.train=="all": test_all_and_generate_special("character")
+            
         else:
             print("NO valid training type")
     else:

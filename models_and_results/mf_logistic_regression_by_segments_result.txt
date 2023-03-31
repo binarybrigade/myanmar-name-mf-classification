@@ -1,12 +1,12 @@
 By Segment
-Total is 6357. Male is 3189. Female is 3168
-Score is : 92.9245283018868
+Total is 6358. Male is 3189. Female is 3169
+Score is : 92.45283018867924
 Confusion Matrix result
-True Negative is 314
-False Positive is 18
-False Negative is 27
-True Positive is 277
-Accuracy Score 92.9245283018868%
-Precision Macro Score 92.99020826084795%
-Recall_Score 92.84836715282181%
-F_Score 92.90050033860298%
+True Negative is 295
+False Positive is 16
+False Negative is 32
+True Positive is 293
+Accuracy Score 92.45283018867924%
+Precision Macro Score 92.51803687538968%
+Recall_Score 92.50457581004204%
+F_Score 92.45275555511604%

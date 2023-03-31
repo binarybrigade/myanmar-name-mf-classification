@@ -49,7 +49,7 @@ def list_to_csv(my_list,path):
             writer.writerow(row)
 
 
-def rule_base_match(test_word):
+def rule_base_match(test_word, model="multi"):
     test_word = clean_text(test_word)
     all_words = syllable_tokenization(test_word)
     two_words = "".join(all_words[0:2])
@@ -59,8 +59,8 @@ def rule_base_match(test_word):
         if test_word in both_list:
             return 0.5 , 6
     
-    if os.path.exists("./processed_data/special_list.csv"):
-        special_list = pd.read_csv("./processed_data/special_list.csv")
+    if os.path.exists(f"./processed_data/special_list_{model}.csv"):
+        special_list = pd.read_csv(f"./processed_data/special_list_{model}.csv")
         special_list_dict = {}
         for index,row in special_list.iterrows():
             special_list_dict[row["name"]] = row["sex"]

@@ -24,7 +24,7 @@ def main():
     
     if st.button("Click here to get answer"):
         translate_test = convert_en_to_mm(eng_input_text)
-        result = manual_test(clean_test(translate_test))
+        result = manual_test(clean_text(translate_test))
         if result==1:
             eng_output_text = eng_output_text + "\n" + eng_input_text + " is female name"
         elif result==0:
