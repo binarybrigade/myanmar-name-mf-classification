@@ -33,5 +33,9 @@ def main():
             eng_output_text = eng_output_text + "\n" + eng_input_text + " can be both male and female."
         st.write(eng_output_text)
 
+    st.title("Report Name")
+    st.text("If you found wrong one or new names, please submit the right one via following link...")
+    st.markdown("[https://docs.google.com/forms/d/e/1FAIpQLSd8XDQHA1ZFk8hjMRH_VThFfI5fGnaJgQO2Dm5xfoVZuLpxbg/viewform?usp=sf_link](https://docs.google.com/forms/d/e/1FAIpQLSd8XDQHA1ZFk8hjMRH_VThFfI5fGnaJgQO2Dm5xfoVZuLpxbg/viewform?usp=sf_link)")
+
 if __name__ == "__main__":
     main()
