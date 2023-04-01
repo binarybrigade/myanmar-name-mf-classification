@@ -280,6 +280,3 @@ if __name__ == "__main__":
             print("NO valid training type")
     else:
         print("No Training Type is provided. Default will be used.")    
-
-
-    
