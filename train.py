@@ -250,14 +250,6 @@ def test_all_and_generate_special(model="multi"):
     print(right_method_count)
     print("=============================================")
 
-def data_preprocessing():
-    clean_data()
-    #word_columns_by_segments()
-    #word_columns_by_syllable_tokenization()
-    word_columns_by_multilingual_semi_syllable_break()
-    #word_columns_by_character_tokenization()
-    mf_leading_exclude_list()
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('-t', '--train', help='Training Type all,segment,character,syllable,multi')
