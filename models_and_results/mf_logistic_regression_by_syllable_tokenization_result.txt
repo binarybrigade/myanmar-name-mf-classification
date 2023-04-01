@@ -1,12 +1,12 @@
 By Syllable Tokenization
-Total is 6358. Male is 3189. Female is 3169
-Score is : 93.08176100628931
+Total is 6360. Male is 3190. Female is 3170
+Score is : 92.9245283018868
 Confusion Matrix result
-True Negative is 308
-False Positive is 24
-False Negative is 20
-True Positive is 284
-Accuracy Score 93.08176100628931%
-Precision Macro Score 93.05511561609123%
-Recall_Score 93.09606848446417%
-F_Score 93.0718954248366%
+True Negative is 304
+False Positive is 15
+False Negative is 30
+True Positive is 287
+Accuracy Score 92.9245283018868%
+Precision Macro Score 93.02553832731887%
+Recall_Score 92.91704162257844%
+F_Score 92.91946947974677%

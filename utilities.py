@@ -96,7 +96,7 @@ def rule_base_match(test_word, model="multi"):
 
 def manual_test(test_word, getMethod=False , model="multi"):
     test_word = clean_text(test_word)
-    sex , method = rule_base_match(test_word)
+    sex , method = rule_base_match(test_word, model)
     if sex !=None:
         if getMethod:
             return sex, method
