@@ -4,21 +4,21 @@ from utilities import manual_test , convert_en_to_mm, clean_text
 def main():
 
     st.title("မြန်မာနာမည်ကို ကျားမ ခွဲမယ်")
-    mmr_input_text = st.text_input("နာမည်လေးရိုက်ထည့်ပေးပါ...")
+    mmr_input_text = st.text_input("နာမည်လေးရိုက်ထည့်ပေးပါ... (မြန်မာလိုပဲ ရိုက်ထည့်ပေးပါ)")
     mmr_output_text = ""
     if st.button("အဖြေရဖို့နှိပ်ပါ"):
         result = manual_test(clean_text(mmr_input_text))
         if result==1:
-            mmr_output_text = mmr_output_text + "\n" + mmr_input_text + " က မိန်းကလေး ပါ။"
+            mmr_output_text = mmr_output_text + "\nလက်ရှိသုံးနေတဲ့ Data များအရ " + mmr_input_text + " ဆိုတဲ့ နာမည်က မိန်းကလေး အများစု သုံးပါတယ်။"
         elif result==0:
-            mmr_output_text = mmr_output_text + "\n" + mmr_input_text + " က ယောက်ျားလေး ပါ။"
+            mmr_output_text = mmr_output_text + "\nလက်ရှိသုံးနေတဲ့ Data များအရ " + mmr_input_text + " ဆိုတဲ့ နာမည်က ယောက်ျားလေး အများစု သုံးပါတယ်။"
         else:
-            mmr_output_text = mmr_output_text + "\n" + mmr_input_text + " က ယောက်ျားလေး ရော မိန်းကလေး ပါ ဖြစ်နိုင်ပါတယ်။"
+            mmr_output_text = mmr_output_text + "\nလက်ရှိသုံးနေတဲ့ Data များအရ " + mmr_input_text + " ဆိုတဲ့ နာမည်က ယောက်ျားလေး ရော မိန်းကလေး ပါ ဖြစ်နိုင်ပါတယ်။"
         st.write(mmr_output_text)
     
     st.title("Let's try to classify Burmese Names by sex")
     
-    eng_input_text = st.text_input("Put the burmese name in below box:")
+    eng_input_text = st.text_input("Put the burmese name in below box: (Type in english)")
     
     eng_output_text = ""
     
@@ -26,11 +26,11 @@ def main():
         translate_test = convert_en_to_mm(eng_input_text)
         result = manual_test(clean_text(translate_test))
         if result==1:
-            eng_output_text = eng_output_text + "\n" + eng_input_text + " is female name"
+            eng_output_text = eng_output_text + "\nAccording current dataset, " + eng_input_text + " is use by mostly female"
         elif result==0:
-            eng_output_text = eng_output_text + "\n" + eng_input_text + " is male name"
+            eng_output_text = eng_output_text + "\nAccording current dataset, " + eng_input_text + " is use by mostly female"
         else:
-            eng_output_text = eng_output_text + "\n" + eng_input_text + " can be both male and female."
+            eng_output_text = eng_output_text + "\nAccording current dataset, " + eng_input_text + " can be both male and female."
         st.write(eng_output_text)
 
     st.title("Report Name")
