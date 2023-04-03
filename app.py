@@ -28,7 +28,7 @@ def main():
         if result==1:
             eng_output_text = eng_output_text + "\nAccording current dataset, " + eng_input_text + " is use by mostly female"
         elif result==0:
-            eng_output_text = eng_output_text + "\nAccording current dataset, " + eng_input_text + " is use by mostly female"
+            eng_output_text = eng_output_text + "\nAccording current dataset, " + eng_input_text + " is use by mostly male"
         else:
             eng_output_text = eng_output_text + "\nAccording current dataset, " + eng_input_text + " can be both male and female."
         st.write(eng_output_text)
