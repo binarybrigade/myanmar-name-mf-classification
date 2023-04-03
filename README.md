@@ -95,6 +95,6 @@ https://github.com/swanhtet1992/ReSegment/blob/master/resegment.py
 ### Source of Multilingual Semi Syllable Break, Character Tokenization, Syllable Tokenization
 https://github.com/SaPhyoThuHtet/nlp-tool/blob/main/utilities.py
 
-Contact Us
+## Contact Us  
 Thanks for interest to our project. If you want to suggest about this project, please email via info@phyokyi.com
 
